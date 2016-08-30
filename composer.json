@@ -1,0 +1,16 @@
+{
+    "name": "paack/php-client",
+    "description": "PHP client for Paack API",
+    "require": {
+        "guzzlehttp/guzzle": "^6.2"
+    },
+    "authors": [
+        {
+            "name": "Suraj Shirvankar",
+            "email": "surajshirvankar@gmail.com"
+        }
+    ],
+    "require-dev": {
+      "phpunit/phpunit": "5.5.*"
+    }
+}
