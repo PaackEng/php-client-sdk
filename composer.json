@@ -2,7 +2,7 @@
     "name": "paack/php-client",
     "description": "PHP client for Paack API",
     "require": {
-        "guzzlehttp/guzzle": "^6.2"
+        "guzzlehttp/guzzle": "^6.3"
     },
     "authors": [
         {

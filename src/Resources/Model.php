@@ -1,4 +1,5 @@
 <?php
+namespace Paack\Resources;
 
 class Model extends ArrayObject {
 
