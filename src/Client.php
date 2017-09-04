@@ -14,8 +14,8 @@ class Client extends \GuzzleHttp\Client {
   public function getOrders($filters=[]) {
     $url = $this->base_uri.'orders?api='.$this->apiKey;
     $response = $this->request('GET', $url);
-    $orders = [];
     $json_response = json_decode($response->getBody()->getContents());
+    $orders = [];
     foreach($json_response->data as $order)
       $orders[] = new Order($order);
 
@@ -27,11 +27,12 @@ class Client extends \GuzzleHttp\Client {
       throw new \InvalidArgumentException('Please use order request');
     }
 
-    $url = $this->base_uri.'orders?api='.$this->apiKey;
-    $response = $this->request('POST', $url, $order_request->getParams());
+    $url = $this->base_uri.'orders';
+    $params = $order_request->getParams();
+    $params['api'] = $this->apiKey;
+    $response = $this->request('POST', $url, ['json' => $params]);
 
     $json_response = json_decode($response->getBody()->getContents());
-    
     return new Order($json_response->data);
   }
 
