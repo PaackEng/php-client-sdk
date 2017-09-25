@@ -38,7 +38,7 @@ class ClientTest extends TestCase {
     $orderRequest->setRecipientEmail("test@example.com");
     $orderRequest->setRecipientPhone("123123123");
     $orderRequest->setRecipientName("test");
-    $orderRequest->setStoreId(5);
+    $orderRequest->setStoreId(14);
     $orderRequest->setDeliveryAddress("Barcelona", "08006", "Barcelona", "Spain");
     $orderRequest->setRetailerOrderNumber($retailer_order_number);
     $orderRequest->setDeliveryWindow(new DateTime(), new DateTime());
@@ -46,5 +46,15 @@ class ClientTest extends TestCase {
     $data = $client->createOrder($orderRequest);
     $this->assertNotNull($data['id']);
     $this->assertEquals($data['retailer_order_number'], $retailer_order_number);
+  }
+
+  public function testLoadsStores(){
+    $client = new Client(getenv('API_KEY'));
+    $client->setBaseUri("http://localhost:3000/api/public/v1/");
+    $data = $client->getStores();
+    $this->assertNotNull($data);
+    foreach ($data as $store) {
+      $this->assertNotNull($store['id']);
+    }
   }
 }

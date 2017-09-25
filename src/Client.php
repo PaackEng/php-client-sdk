@@ -1,6 +1,7 @@
 <?php
 namespace Paack;
 use Paack\Resources\Order;
+use Paack\Resources\Store;
 use Paack\Resources\OrderRequest;
 
 class Client extends \GuzzleHttp\Client {
@@ -8,7 +9,7 @@ class Client extends \GuzzleHttp\Client {
   private $base_uri;
   public function __construct($apiKey){
     $this->apiKey = $apiKey;
-    parent::__construct();
+    parent::__construct([]);
   }
 
   public function getOrders($filters=[]) {
@@ -20,6 +21,17 @@ class Client extends \GuzzleHttp\Client {
       $orders[] = new Order($order);
 
     return $orders;
+  }
+
+  public function getStores(){
+    $url = $this->base_uri.'stores?api='.$this->apiKey;
+    $response = $this->request('GET', $url);
+    $json_response = json_decode($response->getBody()->getContents());
+    $stores = [];
+    foreach($json_response->data as $store)
+      $stores[] = new Store($store);
+
+    return $stores;
   }
 
   public function createOrder($order_request){
