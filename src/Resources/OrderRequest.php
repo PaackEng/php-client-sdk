@@ -3,7 +3,17 @@
 namespace Paack\Resources;
 
 class OrderRequest {
-	public $packages = [];
+	protected $packages = [];
+	protected $email;
+	protected $phone;
+	protected $name;
+	protected $retailer_store_id;
+	protected $store_id;
+	protected $pickup_address;
+	protected $delivery_address;
+	protected $start_time;
+	protected $end_time;
+
 	public function setRecipientEmail($email){
 		$this->email = $email;
 	}
@@ -113,9 +123,9 @@ class OrderRequest {
 		}
 
 		if(isset($this->packages)){
-			$packages = array();
+			$npackages = array();
 			foreach ($this->packages as $package) {
-				$packages[] = [
+				$npackages[] = [
 					'width'  => $package->width,
 					'height' => $package->height,
 					'length' => $package->length,
@@ -125,7 +135,7 @@ class OrderRequest {
 					'barcode' => $package->barcode
 				];
 			}
-			$params['packages'] = $packages;
+			$params['packages'] = $npackages;
 		}
 
 		if(isset($this->start_time) && isset($this->end_time)){

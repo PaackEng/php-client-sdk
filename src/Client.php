@@ -3,18 +3,39 @@ namespace Paack;
 use Paack\Resources\Order;
 use Paack\Resources\Store;
 use Paack\Resources\OrderRequest;
+use Http\Client\Common\HttpMethodsClient as HttpClient;
+use Http\Discovery\HttpClientDiscovery as HttpClientDiscovery;
+use Http\Discovery\MessageFactoryDiscovery as MessageFactoryDiscovery;
 
-class Client extends \GuzzleHttp\Client {
+class Client {
   private $apiKey;
   private $base_uri;
+  protected $client;
+
   public function __construct($apiKey){
     $this->apiKey = $apiKey;
-    parent::__construct([]);
+    $this->setHttpClient();
   }
+
+  public function setHttpClient(HttpClient $client = null){
+    if ($client === null) {
+        $client = new HttpClient(
+            HttpClientDiscovery::find(),
+            MessageFactoryDiscovery::find()
+        );
+    }
+    $this->client = $client;
+    return $this;
+  }
+
+  public function getHttpClient(){
+    return $this->client;
+  }
+
 
   public function getOrders($filters=[]) {
     $url = $this->base_uri.'orders?api='.$this->apiKey;
-    $response = $this->request('GET', $url);
+    $response = $this->getHttpClient()->send('GET',$url);
     $json_response = json_decode($response->getBody()->getContents());
     $orders = [];
     foreach($json_response->data as $order)
@@ -25,7 +46,9 @@ class Client extends \GuzzleHttp\Client {
 
   public function getStores(){
     $url = $this->base_uri.'stores?api='.$this->apiKey;
-    $response = $this->request('GET', $url);
+    $headers = array();
+    $headers['Content-Type'] = 'application/json';
+    $response = $this->getHttpClient()->send('GET', $url, $headers, json_encode(array()));
     $json_response = json_decode($response->getBody()->getContents());
     $stores = [];
     foreach($json_response->data as $store)
@@ -42,8 +65,9 @@ class Client extends \GuzzleHttp\Client {
     $url = $this->base_uri.'orders';
     $params = $order_request->getParams();
     $params['api'] = $this->apiKey;
-    $response = $this->request('POST', $url, ['json' => $params]);
-
+    $headers = array();
+    $headers['Content-Type'] = 'application/json';
+    $response = $this->getHttpClient()->send('POST', $url, $headers, json_encode($params));
     $json_response = json_decode($response->getBody()->getContents());
     return new Order($json_response->data);
   }
