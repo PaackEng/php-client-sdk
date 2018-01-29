@@ -48,7 +48,7 @@ class Client {
     $url = $this->base_uri.'stores?api='.$this->apiKey;
     $headers = array();
     $headers['Content-Type'] = 'application/json';
-    $response = $this->getHttpClient()->send('GET', $url, $headers, json_encode(array()));
+    $response = $this->getHttpClient()->send('GET', $url);
     $json_response = json_decode($response->getBody()->getContents());
     $stores = [];
     foreach($json_response->data as $store)
