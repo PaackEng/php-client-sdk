@@ -1,7 +1,7 @@
 {
     "_readme": [
         "This file locks the dependencies of your project to a known state",
-        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
+        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
     "content-hash": "22a1fd1d450d2de450a1822f48f72b6e",
@@ -224,6 +224,7 @@
                 }
             ],
             "description": "Provides a simple API and specification that abstracts away the details of HTTP into a single PHP function.",
+            "abandoned": true,
             "time": "2015-05-20T03:37:09+00:00"
         },
         {
@@ -274,6 +275,7 @@
                 "Guzzle",
                 "stream"
             ],
+            "abandoned": true,
             "time": "2014-10-12T19:18:40+00:00"
         },
         {
@@ -994,16 +996,16 @@
         },
         {
             "name": "php-http/mock-client",
-            "version": "v1.0.1",
+            "version": "1.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/php-http/mock-client.git",
-                "reference": "5123dbf0382b0ff3f826ab2a82bc1ce610e10466"
+                "reference": "28195af1ba69590c9c4a02fab7b2eb1fb0200021"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/php-http/mock-client/zipball/5123dbf0382b0ff3f826ab2a82bc1ce610e10466",
-                "reference": "5123dbf0382b0ff3f826ab2a82bc1ce610e10466",
+                "url": "https://api.github.com/repos/php-http/mock-client/zipball/28195af1ba69590c9c4a02fab7b2eb1fb0200021",
+                "reference": "28195af1ba69590c9c4a02fab7b2eb1fb0200021",
                 "shasum": ""
             },
             "require": {
@@ -1024,7 +1026,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "1.0-dev"
+                    "dev-master": "1.1-dev"
                 }
             },
             "autoload": {
@@ -1050,7 +1052,7 @@
                 "mock",
                 "psr7"
             ],
-            "time": "2017-05-02T09:23:14+00:00"
+            "time": "2018-01-08T07:39:39+00:00"
         },
         {
             "name": "phpdocumentor/reflection-common",
@@ -1650,6 +1652,7 @@
                 "mock",
                 "xunit"
             ],
+            "abandoned": true,
             "time": "2017-06-30T09:13:00+00:00"
         },
         {
